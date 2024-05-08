@@ -1,5 +1,5 @@
-from adisconfig import adisconfig
-from log import Log
+from adistools.adisconfig import adisconfig
+from adistools.log import Log
 from pika import BlockingConnection, PlainCredentials, ConnectionParameters
 from json import loads, dumps
 from pprint import pprint
@@ -88,6 +88,9 @@ class Image_Generator:
                     break
                 
                 except openai.BadRequestError:
+                    print('Generation error. Trying again')
+
+                except requests.exceptions.ConnectionError:
                     print('Generation error. Trying again')
 
 
